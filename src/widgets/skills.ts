@@ -33,13 +33,12 @@ export default function skillsWidget(
     themeString?: string
 
 ): string {
-
-    const BASE_HEIGHT = 125
-    const BASE_WIDTH = 812
-    const FIRST_ROW = 90
-    const ROW = 114
-    const PAD = 60
-
+    const BASE_HEIGHT = 125; // The base height for each row
+    const BASE_WIDTH = 812;  // The base width for each row
+    const FIRST_ROW = 90;    // Vertical offset for the first row
+    const ROW = 150;         // Increase this to give more space between rows
+    const PAD = 80;          // Increase padding to make sure boxes don't crowd together
+    
     if (!languagesString) {
         languagesString = 'undefined'
     }
@@ -102,7 +101,6 @@ export default function skillsWidget(
         ((toolsList.length > 1 || toolsList[0] !== 'undefined' ? 1 : 0) * PAD) +
         ((toolsList.length > 1 || toolsList[0] !== 'undefined' ? rowHeightTools : 0) * ROW) +
         (includeNames && (toolsList.length > 1 || toolsList[0] !== 'undefined') ? rowHeightSoftware * 25 : 0);
-
 
     // Set the size of the main SVG container
     const width = BASE_WIDTH
