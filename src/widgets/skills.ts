@@ -33,11 +33,17 @@ export default function skillsWidget(
     themeString?: string
 
 ): string {
-    const BASE_HEIGHT = 125;
+    const BASE_HEIGHT = 125
+    const BASE_WIDTH = 812
+    const FIRST_ROW = 90 
+    const ROW = 114
+    const PAD = 60
+
+    /*const BASE_HEIGHT = 125;
     const BASE_WIDTH = 812;
     const FIRST_ROW = 90;
     const ROW = 114;
-    const PAD = 60;
+    const PAD = 60;*/
 
     if (!languagesString) {
         languagesString = 'undefined'
@@ -136,8 +142,8 @@ export default function skillsWidget(
                     colorFrom: '#FFFFFF',
                     colorTo: '#808080',
                     icon: 'undefined',
-                    width: -1,
-                    height: -1,
+                    width: 2,
+                    height: 2,
                     xOffset: 0,
                 }
             }
@@ -157,8 +163,8 @@ export default function skillsWidget(
 
             boxes +=
                 foundData.icon != 'Undefined'
-                    ? `<g transform="translate(${transX + (100 - foundData.width) / 2
-                    } ${transY + (100 - foundData.height) / 2})">` +
+                    ? `<g transform="translate(${transX + (80 - foundData.width) / 2
+                    } ${transY + (80 - foundData.height) / 2})">` +
                     foundData.icon +
                     '</g>'
                     : ''
@@ -168,53 +174,53 @@ export default function skillsWidget(
                     (80 - foundData.name[0].length * 7.5) / 2.3 +
                     foundData.xOffset
                     } ${60 + 140 * row})">
-                    <text id="languages" fill="${foundData.colorTo
+                     <text id="languages" fill="${foundData.colorTo
                     }" transform="translate(0 44)" font-size="16" font-family="Roboto-Light, Roboto, sans-serif" font-weight="300">
-                        <tspan x="0" y="0">${foundData.name[0]}</tspan>
-                    </text>
-                </g>`
+                         <tspan x="0" y="0">${foundData.name[0]}</tspan>
+                     </text>
+                 </g>`
             }
         }
         return boxes
     }
 
     return `
-    <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"
-    xmlns="http://www.w3.org/2000/svg">
-        ${buildCard(width, height, theme.background)}
-        <g id="header-text" transform="translate(60 60)">
-            <text style="display:${languageList.length <= 1 && languageList[0] === 'undefined' ? "none" : "block"}" id="languages" transform="translate(0 44)" fill="${theme.title}" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
-                <tspan x="0" y="0">Languages</tspan>
-            </text>
-            <text style="display:${frameworkList.length <= 1 && frameworkList[0] === 'undefined' ? "none" : "block"}" id="frameworks" transform="translate(0 44)" fill="${theme.title}" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
-                <tspan x="0" y="0">Frameworks</tspan>
-            </text>
-            <text style="display:${libraryList.length <= 1 && libraryList[0] === 'undefined' ? "none" : "block"}" id="libraries" transform="translate(0 44)" fill="${theme.title}" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
-                <tspan x="0" y="0">Libraries</tspan>
-            </text>
-            <text style="display:${toolsList.length <= 1 && toolsList[0] === 'undefined' ? "none" : "block"}" id="tools" transform="translate(0 44)" fill="${theme.title}" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
-                <tspan x="0" y="0">Tools</tspan>
-            </text>
-            <text style="display:${softwareList.length <= 1 && softwareList[0] === 'undefined' ? "none" : "block"}" id="software" transform="translate(0 44)" fill="${theme.title}" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
-                <tspan x="0" y="0">Software</tspan>
-            </text>
-        </g>
-        <g style="display:${languageList.length <= 1 && languageList[0] === 'undefined' ? "none" : "block"}" id="boxes" transform="translate(60 190)">
-            ${getBoxes(languageList, 1)}
-        </g>
-        <g style="display:${frameworkList.length <= 1 && frameworkList[0] === 'undefined' ? "none" : "block"}" id="boxes" transform="translate(60 ${frameworkTitleHeight + 100})">
-            ${getBoxes(frameworkList, 2)}
-        </g>
-        <g style="display:${libraryList.length <= 1 && libraryList[0] === 'undefined' ? "none" : "block"}" id="boxes" transform="translate(60 ${libraryTitleHeight + 100})">
-            ${getBoxes(libraryList, 3)}
-        </g>
-        <g style="display:${toolsList.length <= 1 && toolsList[0] === 'undefined' ? "none" : "block"}" id="boxes" transform="translate(60 ${toolsTitleHeight + 100})">
-            ${getBoxes(toolsList, 4)}
-        </g>
-        <g style="display:${softwareList.length <= 1 && softwareList[0] === 'undefined' ? "none" : "block"}" id="boxes" transform="translate(60 ${softwareTitleHeight + 100})">
-            ${getBoxes(softwareList, 5)}
-        </g>
-        
-    </svg>
-  `
+     <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"
+     xmlns="http://www.w3.org/2000/svg">
+         ${buildCard(width, height, theme.background)}
+         <g id="header-text" transform="translate(60 60)">
+             <text style="display:${languageList.length <= 1 && languageList[0] === 'undefined' ? "none" : "block"}" id="languages" transform="translate(0 44)" fill="${theme.title}" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
+                 <tspan x="0" y="0">Languages</tspan>
+             </text>
+             <text style="display:${frameworkList.length <= 1 && frameworkList[0] === 'undefined' ? "none" : "block"}" id="frameworks" transform="translate(0 44)" fill="${theme.title}" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
+                 <tspan x="0" y="0">Frameworks</tspan>
+             </text>
+             <text style="display:${libraryList.length <= 1 && libraryList[0] === 'undefined' ? "none" : "block"}" id="libraries" transform="translate(0 44)" fill="${theme.title}" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
+                 <tspan x="0" y="0">Libraries</tspan>
+             </text>
+             <text style="display:${toolsList.length <= 1 && toolsList[0] === 'undefined' ? "none" : "block"}" id="tools" transform="translate(0 44)" fill="${theme.title}" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
+                 <tspan x="0" y="0">Tools</tspan>
+             </text>
+             <text style="display:${softwareList.length <= 1 && softwareList[0] === 'undefined' ? "none" : "block"}" id="software" transform="translate(0 44)" fill="${theme.title}" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
+                 <tspan x="0" y="0">Software</tspan>
+             </text>
+         </g>
+         <g style="display:${languageList.length <= 1 && languageList[0] === 'undefined' ? "none" : "block"}" id="boxes" transform="translate(60 190)">
+             ${getBoxes(languageList, 1)}
+         </g>
+         <g style="display:${frameworkList.length <= 1 && frameworkList[0] === 'undefined' ? "none" : "block"}" id="boxes" transform="translate(60 ${frameworkTitleHeight + 100})">
+             ${getBoxes(frameworkList, 2)}
+         </g>
+         <g style="display:${libraryList.length <= 1 && libraryList[0] === 'undefined' ? "none" : "block"}" id="boxes" transform="translate(60 ${libraryTitleHeight + 100})">
+             ${getBoxes(libraryList, 3)}
+         </g>
+         <g style="display:${toolsList.length <= 1 && toolsList[0] === 'undefined' ? "none" : "block"}" id="boxes" transform="translate(60 ${toolsTitleHeight + 100})">
+             ${getBoxes(toolsList, 4)}
+         </g>
+         <g style="display:${softwareList.length <= 1 && softwareList[0] === 'undefined' ? "none" : "block"}" id="boxes" transform="translate(60 ${softwareTitleHeight + 100})">
+             ${getBoxes(softwareList, 5)}
+         </g>
+         
+     </svg>
+   `
 }
