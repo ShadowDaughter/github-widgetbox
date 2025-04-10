@@ -28,10 +28,10 @@ const themes_1 = __importDefault(require("../data/themes"));
  * @returns The SVG with all the skills that were passed.
  */
 function skillsWidget(languagesString, frameworksString, librariesString, toolsString, softwareString, includeNames, themeString) {
-    const BASE_HEIGHT = 25;
-    const BASE_WIDTH = 712;
-    const FIRST_ROW = 50;
-    const ROW = 50;
+    const BASE_HEIGHT = 125;
+    const BASE_WIDTH = 812;
+    const FIRST_ROW = 30;
+    const ROW = 30;
     const PAD = 60;
 
     /*const BASE_HEIGHT = 125;
