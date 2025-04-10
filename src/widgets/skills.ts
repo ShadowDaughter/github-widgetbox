@@ -35,7 +35,7 @@ export default function skillsWidget(
 ): string {
     const BASE_HEIGHT = 125
     const BASE_WIDTH = 812
-    const FIRST_ROW = 90 
+    const FIRST_ROW = 90
     const ROW = 114
     const PAD = 60
 
@@ -104,24 +104,19 @@ export default function skillsWidget(
         + (includeNames && (toolsList.length > 1 || toolsList[0] !== 'undefined') ? (rowHeightSoftware) * 25 : 0)
 
     // Set the size of the main SVG container
-    const width = BASE_WIDTH
-    const height =
-        BASE_HEIGHT +
-        (ROW * (
-            (languageList.length > 1 || languageList[0] !== 'undefined' ? rowHeightLanguages : 0) +
+    const width = BASE_WIDTH;
+    const height = BASE_HEIGHT +
+        (ROW * ((languageList.length > 1 || languageList[0] !== 'undefined' ? rowHeightLanguages : 0) +
             (frameworkList.length > 1 || frameworkList[0] !== 'undefined' ? rowHeightFrameworks : 0) +
             (libraryList.length > 1 || libraryList[0] !== 'undefined' ? rowHeightLibraries : 0) +
             (toolsList.length > 1 || toolsList[0] !== 'undefined' ? rowHeightTools : 0) +
-            (softwareList.length > 1 || softwareList[0] !== 'undefined' ? rowHeightSoftware : 0)
-        ))
+            (softwareList.length > 1 || softwareList[0] !== 'undefined' ? rowHeightSoftware : 0)))
         + (PAD * (1 +
             (languageList.length > 1 || languageList[0] !== 'undefined' ? 1 : 0) +
             (frameworkList.length > 1 || frameworkList[0] !== 'undefined' ? 1 : 0) +
             (libraryList.length > 1 || libraryList[0] !== 'undefined' ? 1 : 0) +
             (toolsList.length > 1 || toolsList[0] !== 'undefined' ? 1 : 0) +
-            (softwareList.length > 1 || softwareList[0] !== 'undefined' ? 1 : 0)
-        ))
-        // Add space for the names if true.
+            (softwareList.length > 1 || softwareList[0] !== 'undefined' ? 1 : 0)))
         + (includeNames ? (Math.round(((languageList.length + libraryList.length + frameworkList.length + toolsList.length + softwareList.length) - 0.1) / 5) + 1) * 25 : 0)
 
     /**
@@ -131,11 +126,17 @@ export default function skillsWidget(
      * @returns The gradient boxes with the icons
      */
     function getBoxes(listToBuild: Array<string>, type: number) {
-        let boxes = ''
+        let boxes = '';
+        const BOX_SIZE = 150; // Increase box size (width and height)
+        const BOX_SPACING = 20; // Add spacing between boxes
+        const ICON_PADDING = 20; // Padding for icons inside the box
+
         for (let i = 0; i < listToBuild.length; i++) {
-            // Check the data and add the first result that isn't defined.
-            // It checks the languages first, then the frameworks, and then the libraries.
-            let foundData = findData(languageData, listToBuild[i]) || findData(frameworks, listToBuild[i]) || findData(libraries, listToBuild[i]) || findData(tools, listToBuild[i]) || findData(softwareIDEs, listToBuild[i])
+            let foundData = findData(languageData, listToBuild[i]) ||
+                findData(frameworks, listToBuild[i]) ||
+                findData(libraries, listToBuild[i]) ||
+                findData(tools, listToBuild[i]) ||
+                findData(softwareIDEs, listToBuild[i]);
             if (foundData === undefined) {
                 foundData = {
                     name: [''],
@@ -145,43 +146,38 @@ export default function skillsWidget(
                     width: 2,
                     height: 2,
                     xOffset: 0,
-                }
+                };
             }
 
-            const row = Math.floor(i / 2);
-            const transX = 102 * (i - row * 2);
-            const transY = ROW * row + (includeNames && row > 0 ? 25 * row : 0)
+            const row = Math.floor(i / 5); // 5 icons per row
+            const transX = (BOX_SIZE + BOX_SPACING) * (i % 5); // Adjust horizontal position
+            const transY = (BOX_SIZE + BOX_SPACING) * row + (includeNames && row > 0 ? 25 * row : 0); // Adjust vertical position
 
             boxes += buildGradientBox(
-                // Combine the index and the type number.
                 (i * Math.pow(10, Math.floor(Math.log10(type)) + 1) + type),
                 foundData.colorFrom,
                 foundData.colorTo,
                 transX,
                 transY
-            )
+            );
 
-            boxes +=
-                foundData.icon != 'Undefined'
-                    ? `<g transform="translate(${transX + (80 - foundData.width) / 2
-                    } ${transY + (80 - foundData.height) / 2})">` +
-                    foundData.icon +
-                    '</g>'
-                    : ''
+            boxes += foundData.icon !== 'Undefined'
+                ? `<g transform="translate(${transX + ICON_PADDING} ${transY + ICON_PADDING})">` +
+                foundData.icon +
+                '</g>'
+                : '';
 
             if (includeNames) {
                 boxes += `<g id="header-text" transform="translate(${transX +
-                    (80 - foundData.name[0].length * 7.5) / 2.3 +
-                    foundData.xOffset
-                    } ${60 + 140 * row})">
-                     <text id="languages" fill="${foundData.colorTo
-                    }" transform="translate(0 44)" font-size="16" font-family="Roboto-Light, Roboto, sans-serif" font-weight="300">
+                    (BOX_SIZE - foundData.name[0].length * 7.5) / 2.3 +
+                    foundData.xOffset} ${transY + BOX_SIZE + 20})">
+                     <text id="languages" fill="${foundData.colorTo}" transform="translate(0 44)" font-size="16" font-family="Roboto-Light, Roboto, sans-serif" font-weight="300">
                          <tspan x="0" y="0">${foundData.name[0]}</tspan>
                      </text>
-                 </g>`
+                 </g>`;
             }
         }
-        return boxes
+        return boxes;
     }
 
     return `

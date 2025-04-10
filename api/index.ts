@@ -18,8 +18,8 @@ app.use('*', (req: Request, res: Response) => {
 })
 
 // Start listening on defined port
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log(
-        `Github-WidgetBox listening at http://localhost:${process.env.PORT}`
+        `Github-WidgetBox listening at http://localhost:${process.env.PORT || 3000}`
     )
 })

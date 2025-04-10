@@ -17,7 +17,7 @@ app.use('*', (req, res) => {
     res.send(error_1.default('Unknown', '-28%', 'Invalid API URL!', '-19%'));
 });
 // Start listening on defined port
-app.listen(process.env.PORT, () => {
-    console.log(`Github-WidgetBox listening at http://localhost:${process.env.PORT}`);
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`Github-WidgetBox listening at http://localhost:${process.env.PORT || 3000}`);
 });
 //# sourceMappingURL=index.js.map
