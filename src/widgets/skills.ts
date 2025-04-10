@@ -33,8 +33,8 @@ export default function skillsWidget(
     themeString?: string
 
 ): string {
-    const BASE_HEIGHT = 225
-    const BASE_WIDTH = 912
+    const BASE_HEIGHT = 125
+    const BASE_WIDTH = 812
     const FIRST_ROW = 90 
     const ROW = 114
     const PAD = 60
@@ -77,7 +77,7 @@ export default function skillsWidget(
     const softwareList: string[] = softwareString.split(',')
 
     const rowHeightLanguages = Math.round((languageList.length - 0.1) / 5) > 1 ? Math.round((languageList.length - 0.1) / 5) : 1
-    const languagesTitleHeight = FIRST_ROW
+    const languagesTitleHeight = 0
 
     const rowHeightFrameworks = Math.round((frameworkList.length - 0.1) / 5) > 1 ? Math.round((frameworkList.length - 0.1) / 5) : 1
     const frameworkTitleHeight = languagesTitleHeight
@@ -148,8 +148,8 @@ export default function skillsWidget(
                 }
             }
 
-            const row = Math.floor(i / 5)
-            const transX = 102 * (i - row * 5)
+            const row = Math.floor(i / 2);
+            const transX = 102 * (i - row * 2);
             const transY = ROW * row + (includeNames && row > 0 ? 25 * row : 0)
 
             boxes += buildGradientBox(
