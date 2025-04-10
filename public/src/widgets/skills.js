@@ -30,15 +30,9 @@ const themes_1 = __importDefault(require("../data/themes"));
 function skillsWidget(languagesString, frameworksString, librariesString, toolsString, softwareString, includeNames, themeString) {
     const BASE_HEIGHT = 125;
     const BASE_WIDTH = 812;
-    const FIRST_ROW = 30;
-    const ROW = 30;
-    const PAD = 60;
-
-    /*const BASE_HEIGHT = 125;
-    const BASE_WIDTH = 812;
     const FIRST_ROW = 90;
     const ROW = 114;
-    const PAD = 60;*/
+    const PAD = 60;
     if (!languagesString) {
         languagesString = 'undefined';
     }
@@ -123,24 +117,33 @@ function skillsWidget(languagesString, frameworksString, librariesString, toolsS
                     colorFrom: '#FFFFFF',
                     colorTo: '#808080',
                     icon: 'undefined',
-                    width: 2,
-                    height: 2,
+                    width: -5,
+                    height: -5,
                     xOffset: 0,
                 }
             }
 
-            const row = Math.floor(i / 5);
-            const transX = 102 * (i - row * 5);
-            const transY = ROW * row + (includeNames && row > 0 ? 25 * row : 0);
-            boxes += gradient_box_1.default(
+            const row = Math.floor(i / 5)
+            const transX = 102 * (i - row * 5)
+            const transY = ROW * row + (includeNames && row > 0 ? 25 * row : 0)
+
+            boxes += buildGradientBox(
                 // Combine the index and the type number.
-                (i * Math.pow(10, Math.floor(Math.log10(type)) + 1) + type), foundData.colorFrom, foundData.colorTo, transX, transY);
+                (i * Math.pow(10, Math.floor(Math.log10(type)) + 1) + type),
+                foundData.colorFrom,
+                foundData.colorTo,
+                transX,
+                transY
+            )
+
             boxes +=
                 foundData.icon != 'Undefined'
-                    ? `<g transform="translate(${transX + (80 - foundData.width) / 2} ${transY + (80 - foundData.height) / 2})">` +
+                    ? `<g transform="translate(${transX + (150 - foundData.width) / 2
+                    } ${transY + (150 - foundData.height) / 2})">` +
                     foundData.icon +
                     '</g>'
-                    : '';
+                    : ''
+
             if (includeNames) {
                 boxes += `<g id="header-text" transform="translate(${transX +
                     (80 - foundData.name[0].length * 7.5) / 2.3 +
