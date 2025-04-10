@@ -117,11 +117,12 @@ function skillsWidget(languagesString, frameworksString, librariesString, toolsS
                     colorFrom: '#FFFFFF',
                     colorTo: '#808080',
                     icon: 'undefined',
-                    width: -1,
-                    height: -1,
+                    width: 2,
+                    height: 2,
                     xOffset: 0,
-                };
+                }
             }
+
             const row = Math.floor(i / 5);
             const transX = 102 * (i - row * 5);
             const transY = ROW * row + (includeNames && row > 0 ? 25 * row : 0);

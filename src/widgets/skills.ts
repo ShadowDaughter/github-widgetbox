@@ -137,8 +137,8 @@ export default function skillsWidget(
                     colorFrom: '#FFFFFF',
                     colorTo: '#808080',
                     icon: 'undefined',
-                    width: -1,
-                    height: -1,
+                    width: 2,
+                    height: 2,
                     xOffset: 0,
                 }
             }
