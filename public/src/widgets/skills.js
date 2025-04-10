@@ -151,9 +151,6 @@ function skillsWidget(languagesString, frameworksString, librariesString, toolsS
     xmlns="http://www.w3.org/2000/svg">
         ${card_1.default(width, height, theme.background)}
         <g id="header-text" transform="translate(60 60)">
-            <text id="skills" fill="${theme.title}" transform="translate(0 44)" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
-                <tspan x="0" y="0">Skills</tspan>
-            </text>
             <text style="display:${languageList.length <=  1 && languageList[0] === 'undefined' ? "hidden" : "block"}" id="languages" transform="translate(0 44)" fill="${theme.title}" font-size="42" font-family="Roboto-Medium, Roboto, sans-serif" font-weight="500">
                 <tspan x="0" y="0">Languages</tspan>
             </text>
