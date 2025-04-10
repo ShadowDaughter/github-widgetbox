@@ -175,13 +175,13 @@ export default function skillsWidget(
                 '</g>'
                 : '';
 
-                if (includeNames) {
-                    boxes += `<g id="header-text" transform="translate(${transX + BOX_SIZE / 2} ${transY + BOX_SIZE + 20})">
-                        <text id="languages" fill="${foundData.colorTo}" text-anchor="middle" font-size="${BOX_SIZE / 8}" font-family="Roboto-Light, Roboto, sans-serif" font-weight="300">
+            if (includeNames) {
+                boxes += `<g id="header-text" transform="translate(${transX + BOX_SIZE / 2} ${transY + BOX_SIZE + 25})">
+                        <text id="languages" fill="${foundData.colorTo}" text-anchor="middle" font-size="${BOX_SIZE / 6}" font-family="Roboto-Light, Roboto, sans-serif" font-weight="300">
                             <tspan x="0" y="0">${foundData.name[0]}</tspan>
                         </text>
                     </g>`;
-                }
+            }
         }
         return boxes;
     }
