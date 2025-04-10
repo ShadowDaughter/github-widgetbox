@@ -143,8 +143,8 @@ export default function skillsWidget(
                 }
             }
 
-            const row = Math.floor(i / 5)
-            const transX = 102 * (i - row * 5)
+            const row = Math.floor(i / 3)
+            const transX = 102 * (i - row * 3)
             const transY = ROW * row + (includeNames && row > 0 ? 25 * row : 0)
 
             boxes += buildGradientBox(
