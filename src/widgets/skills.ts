@@ -71,28 +71,28 @@ export default function skillsWidget(
     const toolsList: string[] = toolsString.split(',')
     const softwareList: string[] = softwareString.split(',')
 
-    const rowHeightLanguages = Math.round((languageList.length - 0.1) / 7) > 1 ? Math.round((languageList.length - 0.1) / 7) : 1
+    const rowHeightLanguages = Math.round((languageList.length - 0.1) / 5) > 1 ? Math.round((languageList.length - 0.1) / 5) : 1
     const languagesTitleHeight = FIRST_ROW 
 
-    const rowHeightFrameworks = Math.round((frameworkList.length - 0.1) / 7) > 1 ? Math.round((frameworkList.length - 0.1) / 7) : 1
+    const rowHeightFrameworks = Math.round((frameworkList.length - 0.1) / 5) > 1 ? Math.round((frameworkList.length - 0.1) / 5) : 1
     const frameworkTitleHeight = languagesTitleHeight 
     + ((languageList.length > 1 || languageList[0] !== 'undefined' ? 1  : 0) * PAD) 
     + ((languageList.length > 1 || languageList[0] !== 'undefined' ? rowHeightLanguages : 0) * ROW) 
     + (includeNames && (languageList.length > 1 || languageList[0] !== 'undefined') ? (rowHeightFrameworks) * 25 : 0)
     
-    const rowHeightLibraries = Math.round((libraryList.length - 0.1) / 7) > 1 ? Math.round((libraryList.length - 0.1) / 7) : 1
+    const rowHeightLibraries = Math.round((libraryList.length - 0.1) / 5) > 1 ? Math.round((libraryList.length - 0.1) / 5) : 1
     const libraryTitleHeight = frameworkTitleHeight 
     + ((frameworkList.length > 1 || frameworkList[0] !== 'undefined' ? 1  : 0) * PAD) 
     + ((frameworkList.length > 1 || frameworkList[0] !== 'undefined' ? rowHeightFrameworks : 0) * ROW)
     +  (includeNames && (frameworkList.length > 1 || frameworkList[0] !== 'undefined') ? (rowHeightLibraries) * 25 : 0)
 
-    const rowHeightTools = Math.round((toolsList.length - 0.1) / 7) > 1 ? Math.round((toolsList.length - 0.1) / 7) : 1
+    const rowHeightTools = Math.round((toolsList.length - 0.1) / 5) > 1 ? Math.round((toolsList.length - 0.1) / 5) : 1
     const toolsTitleHeight = libraryTitleHeight
     + ((libraryList.length > 1 || libraryList[0] !== 'undefined' ? 1  : 0) * PAD) 
     + ((libraryList.length > 1 || libraryList[0] !== 'undefined' ? rowHeightLibraries : 0) * ROW)
     +  (includeNames  && (libraryList.length > 1 || libraryList[0] !== 'undefined') ? (rowHeightTools) * 25 : 0)
 
-    const rowHeightSoftware = Math.round((softwareList.length - 0.1) / 7) > 1 ? Math.round((softwareList.length - 0.1) / 7) : 1
+    const rowHeightSoftware = Math.round((softwareList.length - 0.1) / 5) > 1 ? Math.round((softwareList.length - 0.1) / 5) : 1
     const softwareTitleHeight = toolsTitleHeight
     + ((toolsList.length > 1 || toolsList[0] !== 'undefined' ? 1  : 0) * PAD) 
     + ((toolsList.length > 1 || toolsList[0] !== 'undefined' ? rowHeightTools : 0) * ROW)
@@ -117,7 +117,7 @@ export default function skillsWidget(
             (softwareList.length > 1 || softwareList[0] !== 'undefined' ? 1 : 0)
             ))
         // Add space for the names if true.
-        + (includeNames ? (Math.round(((languageList.length + libraryList.length + frameworkList.length + toolsList.length+ softwareList.length) - 0.1) / 7) + 1) * 25 : 0)
+        + (includeNames ? (Math.round(((languageList.length + libraryList.length + frameworkList.length + toolsList.length+ softwareList.length) - 0.1) / 5) + 1) * 25 : 0)
 
         /**
          * Builds the gradient boxes and sets the names.
@@ -143,8 +143,8 @@ export default function skillsWidget(
                 }
             }
 
-            const row = Math.floor(i / 7)
-            const transX = 102 * (i - row * 7)
+            const row = Math.floor(i / 5)
+            const transX = 102 * (i - row * 5)
             const transY = ROW * row + (includeNames && row > 0 ? 25 * row : 0)
 
             boxes += buildGradientBox(
