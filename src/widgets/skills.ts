@@ -33,8 +33,8 @@ export default function skillsWidget(
     themeString?: string
 
 ): string {
-    const BASE_HEIGHT = 125
-    const BASE_WIDTH = 812
+    const BASE_HEIGHT = 225
+    const BASE_WIDTH = 912
     const FIRST_ROW = 90 
     const ROW = 114
     const PAD = 60
