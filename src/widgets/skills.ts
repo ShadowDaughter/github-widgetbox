@@ -125,62 +125,70 @@ export default function skillsWidget(
          * @param type Indicates which type of list it is (languages, frameworks, libraries, tools, etc.). It is important that the type is not used twice.
          * @returns The gradient boxes with the icons
          */
-    function getBoxes(listToBuild:Array<string>, type:number) {
-        let boxes = ''
-        for (let i = 0; i < listToBuild.length; i++) {
-            // Check the data and add the first result that isn't defined.
-            // It checks the languages first, then the frameworks, and then the libraries.
-            let foundData = findData(languageData, listToBuild[i]) || findData(frameworks, listToBuild[i]) || findData(libraries, listToBuild[i]) || findData(tools, listToBuild[i]) || findData(softwareIDEs, listToBuild[i])
-            if (foundData === undefined) {
-                foundData = {
-                    name: [''],
-                    colorFrom: '#FFFFFF',
-                    colorTo: '#808080',
-                    icon: 'undefined',
-                    width: -1,
-                    height: -1,
-                    xOffset: 0,
+        function getBoxes(listToBuild: Array<string>, type: number) {
+            let boxes = ''
+            const boxSize = 120;  // Adjust the size of the box (increase from 80 to 120 for example)
+            const boxPadding = 15;  // Add some padding between items
+        
+            for (let i = 0; i < listToBuild.length; i++) {
+                // Check the data and add the first result that isn't defined.
+                let foundData =
+                    findData(languageData, listToBuild[i]) ||
+                    findData(frameworks, listToBuild[i]) ||
+                    findData(libraries, listToBuild[i]) ||
+                    findData(tools, listToBuild[i]) ||
+                    findData(softwareIDEs, listToBuild[i]);
+        
+                if (foundData === undefined) {
+                    foundData = {
+                        name: [''],
+                        colorFrom: '#FFFFFF',
+                        colorTo: '#808080',
+                        icon: 'undefined',
+                        width: -1,
+                        height: -1,
+                        xOffset: 0,
+                    };
+                }
+        
+                const row = Math.floor(i / 5); // 5 items per row
+                const transX = (boxSize + boxPadding) * (i - row * 5); // Adjust X position to make boxes wider
+                const transY = ROW * row + (includeNames && row > 0 ? 25 * row : 0); // Adjust Y position accordingly
+        
+                // Increase the box size (120) for the gradient box
+                boxes += buildGradientBox(
+                    (i * Math.pow(10, Math.floor(Math.log10(type)) + 1) + type),
+                    foundData.colorFrom,
+                    foundData.colorTo,
+                    transX,
+                    transY
+                );
+        
+                boxes +=
+                    foundData.icon != 'Undefined'
+                        ? `<g transform="translate(${
+                              transX + (boxSize - foundData.width) / 2
+                          } ${transY + (boxSize - foundData.height) / 2})">` +
+                          foundData.icon +
+                          '</g>'
+                        : '';
+        
+                if (includeNames) {
+                    boxes += `<g id="header-text" transform="translate(${
+                        transX +
+                        (boxSize - foundData.name[0].length * 7.5) / 2.3 +
+                        foundData.xOffset
+                    } ${60 + 140 * row})">
+                        <text id="languages" fill="${
+                            foundData.colorTo
+                        }" transform="translate(0 44)" font-size="16" font-family="Roboto-Light, Roboto, sans-serif" font-weight="300">
+                            <tspan x="0" y="0">${foundData.name[0]}</tspan>
+                        </text>
+                    </g>`;
                 }
             }
-
-            const row = Math.floor(i / 3)
-            const transX = 102 * (i - row * 3)
-            const transY = ROW * row + (includeNames && row > 0 ? 25 * row : 0)
-
-            boxes += buildGradientBox(
-                // Combine the index and the type number.
-                (i * Math.pow(10, Math.floor(Math.log10(type)) + 1) + type),
-                foundData.colorFrom,
-                foundData.colorTo,
-                transX,
-                transY
-            )
-
-            boxes +=
-                foundData.icon != 'Undefined'
-                    ? `<g transform="translate(${
-                          transX + (80 - foundData.width) / 2
-                      } ${transY + (80 - foundData.height) / 2})">` +
-                      foundData.icon +
-                      '</g>'
-                    : ''
-
-            if (includeNames) {
-                boxes += `<g id="header-text" transform="translate(${
-                    transX +
-                    (80 - foundData.name[0].length * 7.5) / 2.3 +
-                    foundData.xOffset
-                } ${60 + 140 * row})">
-                    <text id="languages" fill="${
-                        foundData.colorTo
-                    }" transform="translate(0 44)" font-size="16" font-family="Roboto-Light, Roboto, sans-serif" font-weight="300">
-                        <tspan x="0" y="0">${foundData.name[0]}</tspan>
-                    </text>
-                </g>`
-            }
+            return boxes;
         }
-        return boxes
-    }
 
     return `
     <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"
