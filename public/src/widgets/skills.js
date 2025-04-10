@@ -117,8 +117,8 @@ function skillsWidget(languagesString, frameworksString, librariesString, toolsS
                     colorFrom: '#FFFFFF',
                     colorTo: '#808080',
                     icon: 'undefined',
-                    width: -5,
-                    height: -5,
+                    width: -1,
+                    height: -1,
                     xOffset: 0,
                 }
             }
@@ -138,8 +138,8 @@ function skillsWidget(languagesString, frameworksString, librariesString, toolsS
 
             boxes +=
                 foundData.icon != 'Undefined'
-                    ? `<g transform="translate(${transX + (150 - foundData.width) / 2
-                    } ${transY + (150 - foundData.height) / 2})">` +
+                    ? `<g transform="translate(${transX + (100 - foundData.width) / 2
+                    } ${transY + (100 - foundData.height) / 2})">` +
                     foundData.icon +
                     '</g>'
                     : ''
