@@ -132,7 +132,7 @@ export default function skillsWidget(
      */
     function getBoxes(listToBuild: Array<string>, type: number) {
         let boxes = '';
-        const BOX_SIZE = 125;
+        const BOX_SIZE = 120;
         const BOX_SPACING = 20;
         const ROW = BOX_SIZE + 40;
         const ICON_SCALE = 1.5;

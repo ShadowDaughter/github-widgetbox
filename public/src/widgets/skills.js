@@ -107,7 +107,7 @@ function skillsWidget(languagesString, frameworksString, librariesString, toolsS
      */
     function getBoxes(listToBuild, type) {
         let boxes = '';
-        const BOX_SIZE = 125;
+        const BOX_SIZE = 120;
         const BOX_SPACING = 20;
         const ROW = BOX_SIZE + 40;
         const ICON_SCALE = 1.5;
