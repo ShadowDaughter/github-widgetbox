@@ -12,6 +12,8 @@
  * @param toColor The final color of the gradient in hexcode
  * @param transX The x coordinate of the box
  * @param transY The y coordinate of the box
+ * @param width The width of the gradient box
+ * @param height The height of the gradient box
  * @returns A gradient box
  */
 export default function buildGradientBox(
@@ -19,7 +21,9 @@ export default function buildGradientBox(
     fromColor: string,
     toColor: string,
     transX: number,
-    transY: number
+    transY: number,
+    width: number = 80, // Default width
+    height: number = 80 // Default height
 ): string {
     return `<defs>
                 <linearGradient id="linear-gradient${id}" x1="0.085" y1="0.941" x2="0.939" y2="0.123" gradientUnits="objectBoundingBox">
@@ -27,6 +31,6 @@ export default function buildGradientBox(
                     <stop offset="1" stop-color="${toColor}"/>
                 </linearGradient>
             </defs>
-            <rect id="gradient-box${id}" transform="translate(${transX} ${transY})" data-name="gradient-box${id}" width="80" height="80" rx="20" fill="url(#linear-gradient${id})"/>
-`
+            <rect id="gradient-box${id}" transform="translate(${transX} ${transY})" data-name="gradient-box${id}" width="${width}" height="${height}" rx="20" fill="url(#linear-gradient${id})"/>
+`;
 }
