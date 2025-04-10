@@ -28,86 +28,103 @@ const themes_1 = __importDefault(require("../data/themes"));
  * @returns The SVG with all the skills that were passed.
  */
 function skillsWidget(languagesString, frameworksString, librariesString, toolsString, softwareString, includeNames, themeString) {
-    const BASE_HEIGHT = 125; // The base height for each row
-    const BASE_WIDTH = 812;  // The base width for each row
-    const FIRST_ROW = 90;    // Vertical offset for the first row
-    const ROW = 150;         // Increase this to give more space between rows
-    const PAD = 80;          // Increase padding to make sure boxes don't crowd together
-
+    const BASE_HEIGHT = 125
+    const BASE_WIDTH = 812
+    const FIRST_ROW = 90 
+    const ROW = 114
+    const PAD = 60
+    
     if (!languagesString) {
-        languagesString = 'undefined';
+        languagesString = 'undefined'
     }
     if (!frameworksString) {
-        frameworksString = 'undefined';
+        frameworksString = 'undefined'
     }
     if (!librariesString) {
-        librariesString = 'undefined';
+        librariesString = 'undefined'
     }
     if (!toolsString) {
-        toolsString = 'undefined';
+        toolsString = 'undefined'
     }
     if (!softwareString) {
-        softwareString = 'undefined';
+        softwareString = 'undefined'
     }
+
     // Set the theme
-    let theme = utils_1.getTheme(themes_1.default, 'default');
+    let theme = getTheme(themes, 'default')
     if (themeString) {
-        theme = utils_1.getTheme(themes_1.default, themeString);
+        theme = getTheme(themes, themeString)
     }
     if (!theme) {
-        theme = utils_1.getTheme(themes_1.default, 'default');
+        theme = getTheme(themes, 'default')
     }
 
-    const rowHeightLanguages = Math.round((languageList.length - 0.1) / 5) > 1 ? Math.round((languageList.length - 0.1) / 5) : 1;
-    const languagesTitleHeight = FIRST_ROW;
+    const languageList=  languagesString.split(',')
+    const frameworkList = frameworksString.split(',')
+    const libraryList = librariesString.split(',')
+    const toolsList = toolsString.split(',')
+    const softwareList = softwareString.split(',')
 
-    const rowHeightFrameworks = Math.round((frameworkList.length - 0.1) / 5) > 1 ? Math.round((frameworkList.length - 0.1) / 5) : 1;
-    const frameworkTitleHeight =
-        languagesTitleHeight +
-        ((languageList.length > 1 || languageList[0] !== 'undefined' ? 1 : 0) * PAD) +
-        ((languageList.length > 1 || languageList[0] !== 'undefined' ? rowHeightLanguages : 0) * ROW) +
-        (includeNames && (languageList.length > 1 || languageList[0] !== 'undefined') ? rowHeightFrameworks * 25 : 0);
+    const rowHeightLanguages = Math.round((languageList.length - 0.1) / 5) > 1 ? Math.round((languageList.length - 0.1) / 5) : 1
+    const languagesTitleHeight = FIRST_ROW 
 
-    const rowHeightLibraries = Math.round((libraryList.length - 0.1) / 5) > 1 ? Math.round((libraryList.length - 0.1) / 5) : 1;
-    const libraryTitleHeight =
-        frameworkTitleHeight +
-        ((frameworkList.length > 1 || frameworkList[0] !== 'undefined' ? 1 : 0) * PAD) +
-        ((frameworkList.length > 1 || frameworkList[0] !== 'undefined' ? rowHeightFrameworks : 0) * ROW) +
-        (includeNames && (frameworkList.length > 1 || frameworkList[0] !== 'undefined') ? rowHeightLibraries * 25 : 0);
+    const rowHeightFrameworks = Math.round((frameworkList.length - 0.1) / 5) > 1 ? Math.round((frameworkList.length - 0.1) / 5) : 1
+    const frameworkTitleHeight = languagesTitleHeight 
+    + ((languageList.length > 1 || languageList[0] !== 'undefined' ? 1  : 0) * PAD) 
+    + ((languageList.length > 1 || languageList[0] !== 'undefined' ? rowHeightLanguages : 0) * ROW) 
+    + (includeNames && (languageList.length > 1 || languageList[0] !== 'undefined') ? (rowHeightFrameworks) * 25 : 0)
+    
+    const rowHeightLibraries = Math.round((libraryList.length - 0.1) / 5) > 1 ? Math.round((libraryList.length - 0.1) / 5) : 1
+    const libraryTitleHeight = frameworkTitleHeight 
+    + ((frameworkList.length > 1 || frameworkList[0] !== 'undefined' ? 1  : 0) * PAD) 
+    + ((frameworkList.length > 1 || frameworkList[0] !== 'undefined' ? rowHeightFrameworks : 0) * ROW)
+    +  (includeNames && (frameworkList.length > 1 || frameworkList[0] !== 'undefined') ? (rowHeightLibraries) * 25 : 0)
 
-    const rowHeightTools = Math.round((toolsList.length - 0.1) / 5) > 1 ? Math.round((toolsList.length - 0.1) / 5) : 1;
-    const toolsTitleHeight =
-        libraryTitleHeight +
-        ((libraryList.length > 1 || libraryList[0] !== 'undefined' ? 1 : 0) * PAD) +
-        ((libraryList.length > 1 || libraryList[0] !== 'undefined' ? rowHeightLibraries : 0) * ROW) +
-        (includeNames && (libraryList.length > 1 || libraryList[0] !== 'undefined') ? rowHeightTools * 25 : 0);
+    const rowHeightTools = Math.round((toolsList.length - 0.1) / 5) > 1 ? Math.round((toolsList.length - 0.1) / 5) : 1
+    const toolsTitleHeight = libraryTitleHeight
+    + ((libraryList.length > 1 || libraryList[0] !== 'undefined' ? 1  : 0) * PAD) 
+    + ((libraryList.length > 1 || libraryList[0] !== 'undefined' ? rowHeightLibraries : 0) * ROW)
+    +  (includeNames  && (libraryList.length > 1 || libraryList[0] !== 'undefined') ? (rowHeightTools) * 25 : 0)
 
-    const rowHeightSoftware = Math.round((softwareList.length - 0.1) / 5) > 1 ? Math.round((softwareList.length - 0.1) / 5) : 1;
-    const softwareTitleHeight =
-        toolsTitleHeight +
-        ((toolsList.length > 1 || toolsList[0] !== 'undefined' ? 1 : 0) * PAD) +
-        ((toolsList.length > 1 || toolsList[0] !== 'undefined' ? rowHeightTools : 0) * ROW) +
-        (includeNames && (toolsList.length > 1 || toolsList[0] !== 'undefined') ? rowHeightSoftware * 25 : 0);
-    /**
-     * Builds the gradient boxes and sets the names.
-     * @param listToBuild The list of items to build the boxes with
-     * @param type Indicates which type of list it is (languages, frameworks, libraries, tools, etc.). It is important that the type is not used twice.
-     * @returns The gradient boxes with the icons
-     */
+    const rowHeightSoftware = Math.round((softwareList.length - 0.1) / 5) > 1 ? Math.round((softwareList.length - 0.1) / 5) : 1
+    const softwareTitleHeight = toolsTitleHeight
+    + ((toolsList.length > 1 || toolsList[0] !== 'undefined' ? 1  : 0) * PAD) 
+    + ((toolsList.length > 1 || toolsList[0] !== 'undefined' ? rowHeightTools : 0) * ROW)
+    +  (includeNames  && (toolsList.length > 1 || toolsList[0] !== 'undefined') ? (rowHeightSoftware) * 25 : 0)
+
+    // Set the size of the main SVG container
+    const width = BASE_WIDTH
+    const height =
+        BASE_HEIGHT +
+        (ROW * (
+            (languageList.length > 1 || languageList[0] !== 'undefined' ? rowHeightLanguages : 0) + 
+            (frameworkList.length > 1 || frameworkList[0] !== 'undefined' ? rowHeightFrameworks : 0) + 
+            (libraryList.length > 1 || libraryList[0] !== 'undefined' ? rowHeightLibraries : 0) +
+            (toolsList.length > 1 || toolsList[0] !== 'undefined' ? rowHeightTools : 0) +
+            (softwareList.length > 1 || softwareList[0] !== 'undefined' ? rowHeightSoftware : 0)
+            ))
+        + (PAD * ( 1 +
+            (languageList.length > 1 || languageList[0] !== 'undefined' ? 1 : 0) + 
+            (frameworkList.length > 1 || frameworkList[0] !== 'undefined' ? 1 : 0) + 
+            (libraryList.length > 1 || libraryList[0] !== 'undefined' ? 1 : 0) +
+            (toolsList.length > 1 || toolsList[0] !== 'undefined' ? 1 : 0) +
+            (softwareList.length > 1 || softwareList[0] !== 'undefined' ? 1 : 0)
+            ))
+        // Add space for the names if true.
+        + (includeNames ? (Math.round(((languageList.length + libraryList.length + frameworkList.length + toolsList.length+ softwareList.length) - 0.1) / 5) + 1) * 25 : 0)
+
+        /**
+         * Builds the gradient boxes and sets the names.
+         * @param listToBuild The list of items to build the boxes with
+         * @param type Indicates which type of list it is (languages, frameworks, libraries, tools, etc.). It is important that the type is not used twice.
+         * @returns The gradient boxes with the icons
+         */
     function getBoxes(listToBuild, type) {
         let boxes = ''
-        const boxSize = 120;  // Adjust the size of the box (increase from 80 to 120 for example)
-        const boxPadding = 15;  // Add some padding between items
-
         for (let i = 0; i < listToBuild.length; i++) {
             // Check the data and add the first result that isn't defined.
-            let foundData =
-                findData(languageData, listToBuild[i]) ||
-                findData(frameworks, listToBuild[i]) ||
-                findData(libraries, listToBuild[i]) ||
-                findData(tools, listToBuild[i]) ||
-                findData(softwareIDEs, listToBuild[i]);
-
+            // It checks the languages first, then the frameworks, and then the libraries.
+            let foundData = findData(languageData, listToBuild[i]) || findData(frameworks, listToBuild[i]) || findData(libraries, listToBuild[i]) || findData(tools, listToBuild[i]) || findData(softwareIDEs, listToBuild[i])
             if (foundData === undefined) {
                 foundData = {
                     name: [''],
@@ -117,43 +134,46 @@ function skillsWidget(languagesString, frameworksString, librariesString, toolsS
                     width: -1,
                     height: -1,
                     xOffset: 0,
-                };
+                }
             }
 
-            const row = Math.floor(i / 5); // 5 items per row
-            const transX = (boxSize + boxPadding) * (i - row * 5); // Adjust X position to make boxes wider
-            const transY = ROW * row + (includeNames && row > 0 ? 25 * row : 0); // Adjust Y position accordingly
+            const row = Math.floor(i / 5)
+            const transX = 102 * (i - row * 5)
+            const transY = ROW * row + (includeNames && row > 0 ? 25 * row : 0)
 
-            // Increase the box size (120) for the gradient box
             boxes += buildGradientBox(
+                // Combine the index and the type number.
                 (i * Math.pow(10, Math.floor(Math.log10(type)) + 1) + type),
                 foundData.colorFrom,
                 foundData.colorTo,
                 transX,
                 transY
-            );
+            )
 
             boxes +=
                 foundData.icon != 'Undefined'
-                    ? `<g transform="translate(${transX + (boxSize - foundData.width) / 2
-                    } ${transY + (boxSize - foundData.height) / 2})">` +
-                    foundData.icon +
-                    '</g>'
-                    : '';
+                    ? `<g transform="translate(${
+                          transX + (80 - foundData.width) / 2
+                      } ${transY + (80 - foundData.height) / 2})">` +
+                      foundData.icon +
+                      '</g>'
+                    : ''
 
             if (includeNames) {
-                boxes += `<g id="header-text" transform="translate(${transX +
-                    (boxSize - foundData.name[0].length * 7.5) / 2.3 +
+                boxes += `<g id="header-text" transform="translate(${
+                    transX +
+                    (80 - foundData.name[0].length * 7.5) / 2.3 +
                     foundData.xOffset
-                    } ${60 + 140 * row})">
-                    <text id="languages" fill="${foundData.colorTo
+                } ${60 + 140 * row})">
+                    <text id="languages" fill="${
+                        foundData.colorTo
                     }" transform="translate(0 44)" font-size="16" font-family="Roboto-Light, Roboto, sans-serif" font-weight="300">
                         <tspan x="0" y="0">${foundData.name[0]}</tspan>
                     </text>
-                </g>`;
+                </g>`
             }
         }
-        return boxes;
+        return boxes
     }
 
     return `
