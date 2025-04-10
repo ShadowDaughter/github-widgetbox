@@ -336,6 +336,17 @@ const languages = [
         xOffset: 1,
     },
     {
+        name: ['LuaU'],
+        colorFrom: '#6CA6FF',
+        colorTo: '#2A4D9E',
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 88 88" transform="scale(0.41)">
+        <image href="https://i.imgur.com/tnuAjjO.png" width="88" height="88" />
+        </svg>`,
+        width: 46,
+        height: 46,
+        xOffset: 1,
+    },
+    {
         name: ['VisualBasic'],
         colorFrom: '#80C7FF',
         colorTo: '#126099',
